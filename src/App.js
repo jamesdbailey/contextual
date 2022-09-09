@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import MyComponent from './MyComponent';
+
+const AppContext = React.createContext();
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const globals = {
+		var1: "test"
+	};
+	const locals = {
+		localVar: "nothing"
+	}
+	const fns = {
+		cbFn: (() => "empty")
+	}
+
+	return (
+		<div className="App">
+			<AppContext.Provider value={{globals, locals, fns}}>
+				<MyComponent />
+			</AppContext.Provider>
+		</div>
+	);
 }
 
 export default App;
+export {AppContext}
